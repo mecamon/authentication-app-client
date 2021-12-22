@@ -4,13 +4,14 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
-    "test": "jest src",
+    "test": "jest src --watch",
     "preview": "vite preview"
   },
   "dependencies": {
     "pinia": "^2.0.8",
     "vue": "^3.2.25",
     "vue-i18n": "^9.2.0-beta.23",
+    "vue-material-design-icons": "^5.0.0",
     "vue-router": "4"
   },
   "devDependencies": {
