@@ -14,16 +14,16 @@
         <div class="dropdown" v-show="isShowingDropdown">
           <div data-testid="profile-menu-item">
             <span class="material-icons icon">person</span>
-            <span class="menu-title">My Profile</span>
+            <span class="menu-title">{{$t("general.myProfile")}}</span>
           </div>
           <div data-testid="group-chat-menu-item">
             <span class="material-icons icon">people_alt</span>
-            <span class="menu-title">Group Chat</span>
+            <span class="menu-title">{{$t("general.groupChat")}}</span>
           </div>
           <hr>
           <div data-testid="logout-menu-item">
             <span class="material-icons icon red">logout</span>
-            <span class="red menu-title">Logout</span>
+            <span class="red menu-title">{{$t("general.logout")}}</span>
           </div>
         </div>
       </div>

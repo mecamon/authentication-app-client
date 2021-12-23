@@ -1,45 +1,45 @@
 <template>
   <div class="container">
-    <h2>Personal info</h2>
-    <h6>Basic info, like your name and photo</h6>
+    <h2>{{ $t("profile.personalInfo") }}</h2>
+    <h6>{{ $t("profile.basicInfo") }}</h6>
     <div class="profile-info">
       <div class="title-area">
         <div>
-          <span class="sub-title">Profile</span>
-          <span class="small-text">Some info may be visible to other people</span>
+          <span class="sub-title">{{ $t("profile.profileLabel") }}</span>
+          <span class="small-text">{{ $t("profile.profileMsg") }}</span>
         </div>
-        <button class="edit-btn">Edit</button>
+        <button class="edit-btn">{{ $t("profile.edit") }}</button>
       </div>
       <hr>
       <div class="info-group">
-        <label>PHOTO</label>
+        <label>{{ $t("profile.photoLabel") }}</label>
         <div class="profile-photo">
           <img :src="userProfileInfo.photo" alt="profile photo" data-testid="photo">  
         </div>
       </div>
       <hr>
       <div class="info-group">
-        <label>NAME</label>
+        <label>{{ $t("profile.nameLabel") }}</label>
         <span data-testid="name" class="content">{{userProfileInfo.name}}</span>
       </div>
       <hr>
       <div class="info-group">
-        <label>BIO</label>
+        <label>{{ $t("profile.bioLabel") }}</label>
         <span data-testid="bio" class="content">{{ userProfileInfo.bio }}</span>
       </div>
       <hr>
       <div class="info-group">
-        <label>PHONE</label>
+        <label>{{ $t("profile.phoneLabel") }}</label>
         <span data-testid="phone" class="content">{{ userProfileInfo.phone }}</span>
       </div>
       <hr>
       <div class="info-group">
-        <label>EMAIL</label>
+        <label>{{ $t("profile.emailLabel") }}</label>
         <span data-testid="email" class="content">{{ userProfileInfo.email }}</span>
       </div>
       <hr>
       <div class="info-group">
-        <label>PASSWORD</label>
+        <label>{{ $t("profile.passwordLabel") }}</label>
         <span data-testid="password" class="content">{{ userProfileInfo.password }}</span>
       </div>
     </div>

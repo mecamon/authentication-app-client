@@ -5,8 +5,8 @@
         <img src="../assets/images/devchallenges.svg" alt="dev challenges logo">
       </div>
       <div v-if="!isLogin">
-        <span class="bold">{{ $t("message.loginFormMsg1") }}</span>
-        <span class="light">{{ $t("message.loginFormMsg2") }}</span>
+        <span class="bold">{{ $t("auth.loginFormMsg1") }}</span>
+        <span class="light">{{ $t("auth.loginFormMsg2") }}</span>
       </div>
       <span v-else>Login</span>
       <div class="input-container">
@@ -21,19 +21,19 @@
         :disabled="canSendUserInfo"
         data-testid="log-or-sign-button" 
         @click.prevent="handleSubmit"
-        >{{ isLogin ? 'Login' : $t("message.startCoding") }}
+        >{{ isLogin ? 'Login' : $t("auth.startCoding") }}
       </button>
-      <span class="muted">{{ $t("message.logWithSocials") }}</span>
+      <span class="muted">{{ $t("auth.logWithSocials") }}</span>
       <socials />
-      <span v-if="!isLogin" class="muted">{{ $t("message.alreadyMember") }}
-        <span class="accent" data-testid="login" @click="$emit('switch-to-login')">{{ $t("message.login") }}</span>
+      <span v-if="!isLogin" class="muted">{{ $t("auth.alreadyMember") }}
+        <span class="accent" data-testid="login" @click="$emit('switch-to-login')">{{ $t("auth.login") }}</span>
       </span>
-      <span v-else class="muted">{{ $t("message.registerMsg") }}
-        <span class="accent" data-testid="register" @click="$emit('switch-to-register')">{{ $t("message.register") }}</span>
+      <span v-else class="muted">{{ $t("auth.registerMsg") }}
+        <span class="accent" data-testid="register" @click="$emit('switch-to-register')">{{ $t("auth.register") }}</span>
       </span>
     </form>
     <div class="created-by">
-      <span>{{ $t("message.createdBy") }}</span>
+      <span>{{ $t("auth.createdBy") }}</span>
       <span>devchallenges.io</span>
     </div>
   </div>
