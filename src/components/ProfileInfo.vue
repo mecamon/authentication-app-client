@@ -1,0 +1,141 @@
+<template>
+  <div class="container">
+    <h2>Personal info</h2>
+    <h6>Basic info, like your name and photo</h6>
+    <div class="profile-info">
+      <div class="title-area">
+        <div>
+          <span class="sub-title">Profile</span>
+          <span class="small-text">Some info may be visible to other people</span>
+        </div>
+        <button class="edit-btn">Edit</button>
+      </div>
+      <hr>
+      <div class="info-group">
+        <label>PHOTO</label>
+        <div class="profile-photo">
+          <img :src="userProfileInfo.photo" alt="profile photo" data-testid="photo">  
+        </div>
+      </div>
+      <hr>
+      <div class="info-group">
+        <label>NAME</label>
+        <span data-testid="name" class="content">{{userProfileInfo.name}}</span>
+      </div>
+      <hr>
+      <div class="info-group">
+        <label>BIO</label>
+        <span data-testid="bio" class="content">{{ userProfileInfo.bio }}</span>
+      </div>
+      <hr>
+      <div class="info-group">
+        <label>PHONE</label>
+        <span data-testid="phone" class="content">{{ userProfileInfo.phone }}</span>
+      </div>
+      <hr>
+      <div class="info-group">
+        <label>EMAIL</label>
+        <span data-testid="email" class="content">{{ userProfileInfo.email }}</span>
+      </div>
+      <hr>
+      <div class="info-group">
+        <label>PASSWORD</label>
+        <span data-testid="password" class="content">{{ userProfileInfo.password }}</span>
+      </div>
+    </div>
+  </div>
+</template>
+<script setup lang="ts">
+import { UserProfileInfo } from '../models/user-profile-info';
+
+const props = defineProps<Props>()
+
+interface Props {
+  userProfileInfo: UserProfileInfo
+}
+</script>
+<style lang="scss" scoped>
+  div.container {
+    width: 50%;
+    margin: 0 auto;
+    padding: 2rem 0;
+    h2, h6 {
+      text-align: center;
+    }
+    h2 {
+      font-size: 36px;
+      font-weight: 400;
+    }
+    h6 {
+      font-size: 18px;
+      font-weight: 300;
+      margin-bottom: 46px;
+    }
+  }
+  div.profile-info{
+    display: flex;
+    flex-direction: column;
+    border: 1px var(--border-color) solid;
+    border-radius: 12px;
+    div.info-group{
+      display: flex;
+      align-items: center;
+      padding: 24px 48px;
+      label {
+        width: 33%;
+        display: block;
+        color: var(--mute-color);
+        font-size: 13px;
+      }
+      span.content {
+        font-size: 18px;
+        font-weight: 500;
+      }
+      
+    }
+  }
+  div.title-area {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 28px;
+    margin-bottom: 28px;
+    padding: 8px 48px;
+    div {
+      display: flex;
+      flex-direction: column;
+    }
+
+  }
+  div.profile-photo {
+    width: 72px;
+    height: 72px;
+    overflow: hidden;
+    border-radius: 8px;
+    img {
+      height: 72px;
+      width: auto;
+      border-radius: 8px;
+    }
+  }
+  .sub-title {
+    font-size: 24px;
+    font-weight: 400;
+  }
+  .small-text {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--mute-color);
+  }
+  .edit-btn {
+    font-size: 16px;
+    border-radius: 12px;
+    padding: 0 35px;
+    border: 1px var(--border-color) solid;
+    color: var(--mute-color);
+    background-color: transparent;
+  }
+  .edit-btn:hover {
+    background-color: var(--accent-color);
+    color: white;
+  }
+</style>
