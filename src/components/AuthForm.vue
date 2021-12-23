@@ -10,11 +10,11 @@
       </div>
       <span v-else>Login</span>
       <div class="input-container">
-        <email fillColor="#828282" :size="20" />
+        <span class="material-icons icons">email</span>
         <input type="email" placeholder="Email" v-model="userInfo.email" data-testid="email-input">
       </div>
       <div class="input-container">
-        <lock fillColor="#828282" :size="20"/>
+        <span class="material-icons icons">https</span>
         <input type="password" placeholder="Password" v-model="userInfo.password" data-testid="password-input">
       </div>
       <button type="submit" 
@@ -24,25 +24,23 @@
         >{{ isLogin ? 'Login' : $t("message.startCoding") }}
       </button>
       <span class="muted">{{ $t("message.logWithSocials") }}</span>
-      <div class="socials">
-        <img src="../assets/images/Google.svg" alt="google icon">
-        <img src="../assets/images/Facebook.svg" alt="facebook icon">
-        <img src="../assets/images/Twitter.svg" alt="twitter icon">
-        <img src="../assets/images/Gihub.svg" alt="github icon">
-      </div>
-        <span v-if="!isLogin" class="muted">{{ $t("message.alreadyMember") }}
-          <span class="accent">{{ $t("message.login") }}</span>
-        </span>
-        <span v-else class="muted">{{ $t("message.registerMsg") }}
-          <span class="accent">{{ $t("message.register") }}</span>
-        </span>
+      <socials />
+      <span v-if="!isLogin" class="muted">{{ $t("message.alreadyMember") }}
+        <span class="accent" data-testid="login" @click="$emit('switch-to-login')">{{ $t("message.login") }}</span>
+      </span>
+      <span v-else class="muted">{{ $t("message.registerMsg") }}
+        <span class="accent" data-testid="register" @click="$emit('switch-to-register')">{{ $t("message.register") }}</span>
+      </span>
     </form>
+    <div class="created-by">
+      <span>{{ $t("message.createdBy") }}</span>
+      <span>devchallenges.io</span>
+    </div>
   </div>
 </template>
 <script setup lang="ts">
 import { defineEmits, ref, computed } from 'vue';
-import Email from 'vue-material-design-icons/Email.vue';
-import Lock from 'vue-material-design-icons/Lock.vue';
+import Socials from './Socials.vue'
 
 const props = defineProps<{isLogin?: boolean}>();
 const userInfo = ref<UserInfo>({email: '', password: ''});
@@ -59,6 +57,8 @@ const handleSubmit = () => {
 const emits = defineEmits<{
   (e: 'log-with-email-pass', userInfo: UserInfo): void 
   (e: 'sign-with-email-pass', userInfo: UserInfo): void 
+  (e: 'switch-to-register'): void
+  (e: 'switch-to-login'): void
 }>();
 
 interface UserInfo {
@@ -67,17 +67,41 @@ interface UserInfo {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   .form-container {
-    width: 25%;
+    width: 100%;
     margin: auto;
   }
   form {
-    border: 1px var(--border-color) solid;
-    border-radius: 24px;
-    padding: 58px;
+    border: none;
+    padding: 24px;
     display: flex;
     flex-direction: column;
+  }
+  @media (min-width: 600px) {
+    .form-container {
+      width: 70%;
+    }
+    form {
+      border: 1px var(--border-color) solid;
+      border-radius: 24px;
+      padding: 58px;
+    }
+  }
+  @media (min-width: 850px) {
+    .form-container {
+      width: 60%;
+    }
+  }
+  @media (min-width: 1200px) {
+    .form-container {
+      width: 40%;
+    }
+  }
+  @media (min-width: 1600px) {
+    .form-container {
+      width: 25%;
+    }
   }
   .input-container {
     display: flex;
@@ -93,7 +117,6 @@ interface UserInfo {
       font-size: 16px;
       width: 80%;
       text-indent: 0.4rem;
-      margin-bottom: 0.3rem;
       font-weight: 400;
     }
     input::placeholder {
@@ -139,17 +162,22 @@ interface UserInfo {
     font-size: 14px;
     font-weight: 400;
     color: var(--accent-color);
+    cursor: pointer;
   }
-  div.socials {
+  .icons{
+    color: var(--mute-color);
+    font-size: 20px;
+  }
+  div.created-by {
+    width: 100%;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 22px 0;
-    img {
-      margin: 0 0.4rem;
-      width: 42px;
-      height: auto;
+    justify-content: space-between;
+    margin-top: 0.4rem;
+    span {
+      display: block;
+      color: var(--mute-color);
+      font-size: 14px;
+      font-weight: 400;
     }
   }
-  
 </style>

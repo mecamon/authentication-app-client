@@ -3,10 +3,15 @@ module.exports = {
     'js',
     'ts',
     'json',
-    'vue'
+    'vue',
   ],
+  moduleNameMapper: {
+    '^.+\\.(jpg|jpeg|png|gif|webp|avif|svg)$':
+      '<rootDir>/__mocks__/fileMock.js',
+  },
   transform: {
     '^.+\\.ts$': 'ts-jest',
-    '^.+\\.vue$': 'vue-jest'
-  }
+    '^.+\\.vue$': 'vue-jest',
+  },
+
 }

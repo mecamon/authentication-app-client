@@ -11,7 +11,8 @@ const messages = {
       registerMsg: "Don't have an account yet? ",
       login: 'Login',
       register: 'Register',
-      startCoding: 'Start coding now'
+      startCoding: 'Start coding now',
+      createdBy: 'Created by Carlos Mejía (Meca)'
     }
   },
   es: {
@@ -24,14 +25,15 @@ const messages = {
       registerMsg: "¿Todavía no tienes una cuenta? ",
       login: 'Haz login',
       register: 'Registrate',
-      startCoding: 'Comience ahora'
+      startCoding: 'Comience ahora',
+      createdBy: 'Creado por Carlos Mejía (Meca)'
     }
   }
 }
 
 export const i18n = createI18n({
-  locale: 'es',
-  fallbackLocale: 'en',
+  locale: 'en',
+  fallbackLocale: 'es',
   messages
 });
 
