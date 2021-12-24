@@ -19,6 +19,6 @@ import EditProfileForm from '../components/EditProfileForm.vue';
 import { userProfileMockInfo } from '../../__mocks__/user-profile-mock-info';
 import { ref } from 'vue';
 
-const isEditingProfile = ref<boolean>(false);
+const isEditingProfile = ref<boolean>(true);
 
 </script>

@@ -168,16 +168,4 @@ interface UserInfo {
     color: var(--mute-color);
     font-size: 20px;
   }
-  div.created-by {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    margin-top: 0.4rem;
-    span {
-      display: block;
-      color: var(--mute-color);
-      font-size: 14px;
-      font-weight: 400;
-    }
-  }
 </style>

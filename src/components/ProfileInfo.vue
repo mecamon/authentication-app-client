@@ -43,6 +43,10 @@
         <span data-testid="password" class="content">{{ userProfileInfo.password }}</span>
       </div>
     </div>
+    <div class="created-by">
+      <span>{{ $t("auth.createdBy") }}</span>
+      <span>devchallenges.io</span>
+    </div>
   </div>
 </template>
 <script setup lang="ts">

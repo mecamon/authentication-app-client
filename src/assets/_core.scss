@@ -6,6 +6,7 @@
   --mute-color: #828282;
   --main-font-family: 'Noto Sans', sans-serif;
   --border-color: #BDBDBD;
+  --input-border-color: #828282;
   --accent-color: #2F80ED;
   --danger-color: #EB5757;
 }
@@ -13,5 +14,6 @@
 html[data-theme='dark'] {
   --background-color: #333333;
   --common-text-color: #E0E0E0;
+  --input-border-color: #c4c4c4;
 }
 
