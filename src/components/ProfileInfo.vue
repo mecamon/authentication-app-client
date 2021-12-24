@@ -56,18 +56,18 @@ interface Props {
 </script>
 <style lang="scss" scoped>
   div.container {
-    width: 50%;
+    width: 100%;
     margin: 0 auto;
     padding: 2rem 0;
     h2, h6 {
       text-align: center;
     }
     h2 {
-      font-size: 36px;
+      font-size: 24px;
       font-weight: 400;
     }
     h6 {
-      font-size: 18px;
+      font-size: 14px;
       font-weight: 300;
       margin-bottom: 46px;
     }
@@ -75,8 +75,6 @@ interface Props {
   div.profile-info{
     display: flex;
     flex-direction: column;
-    border: 1px var(--border-color) solid;
-    border-radius: 12px;
     div.info-group{
       display: flex;
       align-items: center;
@@ -91,12 +89,35 @@ interface Props {
         font-size: 18px;
         font-weight: 500;
       }
-      
+    }
+  }
+  @media (min-width: 800px) {
+    div.container {
+      width: 70%;
+      h2 {
+        font-size: 36px;
+        font-weight: 400;
+      }
+      h6 {
+        font-size: 18px;
+        font-weight: 300;
+        margin-bottom: 46px;
+      }
+    }
+    div.profile-info{
+      border: 1px var(--border-color) solid;
+      border-radius: 12px;
+    }
+  }  
+  @media (min-width: 1400px) {
+    div.container {
+      width: 50%;
     }
   }
   div.title-area {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin-top: 28px;
     margin-bottom: 28px;
     padding: 8px 48px;
@@ -104,7 +125,6 @@ interface Props {
       display: flex;
       flex-direction: column;
     }
-
   }
   div.profile-photo {
     width: 72px;
@@ -129,7 +149,7 @@ interface Props {
   .edit-btn {
     font-size: 16px;
     border-radius: 12px;
-    padding: 0 35px;
+    padding: 8px 35px;
     border: 1px var(--border-color) solid;
     color: var(--mute-color);
     background-color: transparent;

@@ -2,14 +2,16 @@
   <div class="header-group">
     <img src="../assets/images/devchallenges.svg" alt="logo" data-testid="logo">
     <div class="header-right-side">
-      <div class="profile-photo">
-        <img src="../assets/images/profile-placeholder.png" alt="profile pic">
-      </div>
       <div class="dropdown-container">
         <button data-testid="menu-button" @click="toggleDropdown">
-          <span>Username placeholder</span>
-          <span v-if="!isShowingDropdown" class="material-icons">arrow_drop_down</span>
-          <span v-else class="material-icons">arrow_drop_up</span>
+          <div class="profile-photo">
+            <img src="../assets/images/profile-placeholder.png" alt="profile pic">
+          </div>
+          <div v-if="!isASmallDropDownButton">
+            <span>Username placeholder</span>
+            <span v-if="!isShowingDropdown" class="material-icons">arrow_drop_down</span>
+            <span v-else class="material-icons">arrow_drop_up</span>
+          </div>
         </button>
         <div class="dropdown" v-show="isShowingDropdown">
           <div data-testid="profile-menu-item">
@@ -31,10 +33,25 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref } from 'vue';
+import { onMounted, onUnmounted ,ref } from 'vue';
+
 const isShowingDropdown = ref<boolean>(false);
+const isASmallDropDownButton = ref<boolean>(false);
 const toggleDropdown = () => isShowingDropdown.value = !isShowingDropdown.value;
+
+onMounted(() => {
+  shortenDropdownButtonOnMobile();
+  window.addEventListener('resize', shortenDropdownButtonOnMobile)
+});
+onUnmounted(() => {
+  window.addEventListener('resize', shortenDropdownButtonOnMobile)
+});
+function shortenDropdownButtonOnMobile(): void {
+  isASmallDropDownButton.value = window.innerWidth < 800
+}
+
 </script>
+
 <style lang="scss" scoped>
   hr {
     margin: 0.5rem 0;
@@ -52,7 +69,8 @@ const toggleDropdown = () => isShowingDropdown.value = !isShowingDropdown.value;
   .header-right-side {
     display: flex;
     align-items: center;
-    div.profile-photo {
+  }
+  div.profile-photo {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -66,9 +84,12 @@ const toggleDropdown = () => isShowingDropdown.value = !isShowingDropdown.value;
         height: auto;
       }
     }
-  }
   div.dropdown-container {
+    display: flex;
+    align-items: center;
     position: relative;
+    z-index: 100;
+    background-color: var(--background-color);
     button {
       display: flex;
       align-items: center;
@@ -77,15 +98,22 @@ const toggleDropdown = () => isShowingDropdown.value = !isShowingDropdown.value;
       background-color: inherit;
       border: none;
       outline: none;
-      span {
-        margin: 0 3px;
+      div {
+        display: flex;
+        align-items: center;
+        span {
+          margin: 0 3px;
+          display: block;
+        }
       }
+      
     }
   }
   div.dropdown {
     position: absolute;
+    background-color: var(--background-color);
     min-width: 180px;
-    top: 30px;
+    top: 40px;
     right: 0;
     border-radius: 12px;
     padding: 12px;

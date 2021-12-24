@@ -1,12 +1,14 @@
 import {mount} from '@vue/test-utils';
 import ProfileInfo from './ProfileInfo.vue';
 import {userProfileMockInfo} from '../../__mocks__/user-profile-mock-info';
+import { i18n } from '../i18n/locales';
 
 
 describe('ProfileInfo', () => {
   it('Renders the profile information passed in the props', () => {
     const wrapper = mount(ProfileInfo, {
-      props: {userProfileInfo: userProfileMockInfo}
+      props: {userProfileInfo: userProfileMockInfo},
+      global: {plugins: [i18n]}
     });
 
     const name = wrapper.find('[data-testid="name"]');
