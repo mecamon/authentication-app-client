@@ -41,11 +41,15 @@
       <div>
         <button
           type="submit"
-          :disabled="emptyFields"
+          :disabled="emptyFields || isLoading"
           data-testid="save-button"
-          class="save-button"
-          @click="$emit('save-user-info', userInfo)"
-        >Save</button>
+          class="save-button primary-btn"
+        >
+          <span v-if="isLoading" class="lds-ring">
+            <span></span><span></span><span></span><span></span>
+          </span>
+          <span v-if="!isLoading">Save</span>
+        </button>
       </div>
     </form>
     <div class="created-by">
@@ -80,7 +84,7 @@ const emit = defineEmits<{
   (e: 'save-user-info', fd: FormData): void
   (e: 'read-mode'): void
 }>()
-const props = defineProps<{currentUserInfo: UserInfoEdit}>()
+const props = defineProps<{currentUserInfo: UserInfoEdit, isLoading: boolean}>()
 const emptyFields = computed(() => {
   return  userInfoToEdit.value.name === '' ||
       userInfoToEdit.value.bio === '' ||

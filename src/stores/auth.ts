@@ -46,7 +46,7 @@ export const useAuth = defineStore('auth', {
           .catch((e: AxiosError) => {
             this.githubLoginState.isLoading = false
             this.githubLoginState.accessRequest = ''
-            httpErrors.setError(e.response?.status, e.response?.data)
+            httpErrors.setError(e.response?.status, e.response?.data.message)
           })
           .finally(() => httpErrors.resetError())
     },
@@ -64,7 +64,7 @@ export const useAuth = defineStore('auth', {
             this.setAuthentication(true)
           })
           .catch((e: AxiosError) => {
-            httpErrors.setError(e.response?.status, e.response?.data)
+            httpErrors.setError(e.response?.status, e.response?.data.message)
           })
           .finally(() => {
             this.resetGithubLogState()
@@ -81,7 +81,7 @@ export const useAuth = defineStore('auth', {
             this.setAuthentication(true)
           })
           .catch((e: AxiosError) => {
-            httpErrors.setError(e.response?.status, e.response?.data)
+            httpErrors.setError(e.response?.status, e.response?.data.message)
           })
           .finally(() => {
             this.resetLogState()
@@ -98,7 +98,7 @@ export const useAuth = defineStore('auth', {
             this.setAuthentication(true)
           })
           .catch((e: AxiosError) => {
-            httpErrors.setError(e.response?.status, e.response?.data)
+            httpErrors.setError(e.response?.status, e.response?.data.message)
           })
           .finally(() => {
             this.resetLogState()

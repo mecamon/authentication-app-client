@@ -9,6 +9,7 @@
             v-if="isEditingProfile"
             @read-mode="isEditingProfile=false"
             @save-user-info="updateUserInfo($event)"
+            :is-loading="userInfo.isLoading"
             :current-user-info="currentUserInfo"
         />
         <profile-info v-else @edit-mode="setToEditMode()" :user-profile-info="userInfo.data" />

@@ -4,11 +4,12 @@ const baseURL = 'http://localhost:8080'
 const axiosJsonIns = axios.create({
     baseURL,
     timeout: 4000,
+    headers: {'Content-Type': 'application/json'}
 })
 axiosJsonIns.interceptors.request.use(function (config) {
     let token = localStorage.getItem('token')
     config.headers = {
-        'Content-Type': 'application/json',
+
         'Authorization': token ?? '',
     }
     return config
@@ -28,11 +29,11 @@ axiosJsonIns.interceptors.response.use(function (response) {
 const axiosMultiPartIns = axios.create({
     baseURL,
     timeout: 8000,
+    headers: {'Content-Type': 'multipart/form-data'}
 })
 axiosMultiPartIns.interceptors.request.use(function (config) {
     let token = localStorage.getItem('token')
     config.headers = {
-        'Content-Type': 'multipart/form-data',
         'Authorization': token ?? '',
     }
     return config

@@ -50,5 +50,4 @@ export class UserInfoEdit {
   static empty(): UserInfoEdit {
     return new UserInfoEdit("", "", "", "", "", "", null)
   }
-
 }

@@ -23,29 +23,35 @@ export const useUsers = defineStore('users', {
   },
   actions: {
     async fetchUserInfo() {
+      const httpErrors = useHttpErrors()
       this.userInfo.isLoading = true
       API.getUserInfo()
           .then((res: AxiosResponse<UserInfo, any>) => {
             this.userInfo.data = res.data
           })
           .catch((e: AxiosError) => {
-            const httpErrors = useHttpErrors()
-            httpErrors.setError(e.response?.status, e.response?.data)
+            httpErrors.setError(e.response?.status, e.response?.data.message)
             this.userInfo.data = null
           })
-          .finally(() => this.userInfo.isLoading = false)
+          .finally(() => {
+            this.userInfo.isLoading = false
+            httpErrors.resetError()
+          } )
     },
     async updateUserInfo(fd: FormData) {
+      const httpErrors = useHttpErrors()
       this.userInfo.isLoading = true
       API.updateUserInfo(fd)
           .then((_: AxiosResponse) => {
             this.fetchUserInfo()
           })
           .catch((e: AxiosError) => {
-            const httpErrors = useHttpErrors()
-            httpErrors.setError(e.response?.status, e.response?.data)
+            httpErrors.setError(e.response?.status, e.response?.data.message)
           })
-          .finally(() => this.userInfo.isLoading = false)
+          .finally(() => {
+            httpErrors.resetError()
+            this.userInfo.isLoading = false
+          } )
     }
   },
 })

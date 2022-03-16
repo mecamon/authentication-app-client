@@ -38,7 +38,14 @@
         :disabled="canSendUserInfo"
         data-testid="log-or-sign-button"
         @click.prevent="handleSubmit"
-        >{{ isLogin ? 'Login' : $t("auth.startCoding") }}
+        class="primary-btn"
+        >
+        <span v-if="auth.logState.isLoading || auth.githubLoginState.isLoading" class="lds-ring">
+          <span></span><span></span><span></span><span></span>
+        </span>
+        <span v-if="!auth.logState.isLoading && !auth.githubLoginState.isLoading">
+          {{ isLogin ? 'Login' : $t("auth.startCoding") }}
+        </span>
       </button>
       <span class="muted">{{ $t("auth.logWithSocials") }}</span>
       <socials @github-login="$emit('github-login')" />
@@ -59,11 +66,13 @@
 <script setup lang="ts">
 import {ref, computed} from 'vue';
 import Socials from './Socials.vue'
+import {useAuth} from "../stores/auth";
 
 const props = defineProps<{isLogin?: boolean}>();
 const userInfo = ref<UserInfo>({email: '', password: ''});
 const canSendUserInfo = computed(() =>
     userInfo.value.email === '' || userInfo.value.password === '');
+const auth = useAuth()
 
 const handleSubmit = () => {
   if(props.isLogin) {

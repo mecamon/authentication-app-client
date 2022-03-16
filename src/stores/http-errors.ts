@@ -24,8 +24,10 @@ export const useHttpErrors = defineStore('http-errors', {
       this.msg = msg
     },
     resetError() {
-      this.statusCode = 0
-      this.msg = ''
+      setTimeout(() => {
+        this.statusCode = 0
+        this.msg = ''
+      }, 6000)
     }
   }
 })
