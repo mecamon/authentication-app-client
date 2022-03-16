@@ -1,48 +1,49 @@
 <template>
   <div class="container">
-    <span class="back">
+    <span class="back" @click="$emit('read-mode')" >
       <span class="material-icons">arrow_back_ios</span>
       <span class="text">Back</span>
     </span>
-    <form @submit="$emit('save-user-info', userInfo)" class="profile-info">
+    <form id="edit-form" @submit.prevent="handlerSubmit()" class="profile-info">
       <div class="title-area">
         <h2>Change Info</h2>
         <h6>Changes will be reflected to every services</h6>
       </div>
       <div class="image-area">
-        <div @click="uploadPhoto" class="image-container">
+        <div @click="uploadPhoto()" class="image-container">
           <span class="material-icons icon">photo_camera</span>
-          <img src="../assets/images/profile-placeholder.png" alt="profile image">
+          <img v-if="!userInfoToEdit.photoURL" src="../assets/images/profile-placeholder.png" alt="profile image">
+          <img v-else :src="userInfoToEdit.photoURL" alt="profile image">
         </div>
-        <button @click="uploadPhoto">CHANGE PHOTO</button>
-        <input type="file" data-testid="photo" ref="inputFile">
+        <button type="button" @click="uploadPhoto()">CHANGE PHOTO</button>
+        <input type="file" name="file" data-testid="photo" ref="inputFile">
       </div>
       <div class="info-group">
         <label for="user-name-input">Name</label>
-        <input type="text" name="name" v-model="userInfo.name" id="user-name-input" data-testid="name">
+        <input type="text" name="name" v-model="userInfoToEdit.name" id="user-name-input" data-testid="name">
       </div>
       <div class="info-group">
         <label for="user-name-input">Bio</label>
-        <input type="text" name="bio" v-model="userInfo.bio" id="user-bio-input" data-testid="bio">
+        <input type="text" name="bio" v-model="userInfoToEdit.bio" id="user-bio-input" data-testid="bio">
       </div>
       <div class="info-group">
         <label for="user-name-input">Phone</label>
-        <input type="number" name="phone" v-model="userInfo.phone" id="user-phone-input" data-testid="phone">
+        <input type="number" name="telephone" v-model="userInfoToEdit.telephone" id="user-phone-input" data-testid="phone">
       </div>
       <div class="info-group">
         <label for="user-name-input">Email</label>
-        <input type="email" name="email" v-model="userInfo.email" id="user-email-input" data-testid="email">
+        <input type="email" name="email" v-model="userInfoToEdit.email" id="user-email-input" data-testid="email">
       </div>
       <div class="info-group">
         <label for="user-name-input">Password</label>
-        <input type="password" name="password" v-model="userInfo.password" id="user-password-input" data-testid="password">
+        <input type="password" name="password" v-model="userInfoToEdit.password" id="user-password-input" data-testid="password">
       </div>
       <div>
-        <button 
+        <button
           type="submit"
-          :disabled="emptyFields" 
-          data-testid="save-button" 
-          class="save-button" 
+          :disabled="emptyFields"
+          data-testid="save-button"
+          class="save-button"
           @click="$emit('save-user-info', userInfo)"
         >Save</button>
       </div>
@@ -53,24 +54,38 @@
     </div>
   </div>
 </template>
+
 <script setup lang="ts">
-import { ref, computed } from 'vue';
-import { UserProfileInfo } from '../models/user-profile-info';
-const userInfo = ref<UserProfileInfo>(UserProfileInfo.empty());
+import {ref, computed, onMounted} from 'vue';
+import {UserInfoEdit} from "../models/user-info";
+
+onMounted(() => {
+  userInfoToEdit.value = props.currentUserInfo
+})
+
+const userInfoToEdit = ref<UserInfoEdit>(UserInfoEdit.empty());
 const inputFile = ref<any>([]);
+
+const handlerSubmit = () => {
+  const form = document.querySelector('#edit-form')
+  const formParsed = <HTMLFormElement>form
+  const fd = new FormData(formParsed)
+  emit('save-user-info', fd)
+}
 
 const uploadPhoto = () => {
   inputFile.value.click();
 }
 const emit = defineEmits<{
-  (e: 'save-user-info', userInfo: UserProfileInfo): void
+  (e: 'save-user-info', fd: FormData): void
+  (e: 'read-mode'): void
 }>()
+const props = defineProps<{currentUserInfo: UserInfoEdit}>()
 const emptyFields = computed(() => {
-  return  userInfo.value.name === '' ||
-          userInfo.value.bio === '' ||
-          userInfo.value.phone === '' ||
-          userInfo.value.email === '' ||
-          userInfo.value.password === '' 
+  return  userInfoToEdit.value.name === '' ||
+      userInfoToEdit.value.bio === '' ||
+      userInfoToEdit.value.telephone === '' ||
+      userInfoToEdit.value.email === ''
 });
 </script>
 
@@ -94,7 +109,7 @@ const emptyFields = computed(() => {
     span.back:hover {
       cursor: pointer;
       span.text {
-        text-decoration: underline;  
+        text-decoration: underline;
       }
     }
     form.profile-info {
@@ -113,8 +128,8 @@ const emptyFields = computed(() => {
     }
     div.image-container {
       position: relative;
-      width: 72px;
-      height: 72px;
+      //width: 72px;
+      //height: 72px;
       border-radius: 8px;
       overflow: hidden;
       span.icon {
@@ -199,5 +214,5 @@ const emptyFields = computed(() => {
     font-size: 16px;
     padding: 8px 24px;
   }
-  
+
 </style>

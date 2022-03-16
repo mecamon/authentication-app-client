@@ -1,10 +1,14 @@
 import { mount } from '@vue/test-utils';
 import EditProfileForm from '../components/EditProfileForm.vue';
 import { i18n } from '../i18n/locales';
+import {currentUserInfo} from "../../__mocks__/user-profile-mock-info";
 
 describe('EditProfileForm', () => {
   it('Expect to find the personal information input fields and a clicked buttton', async () => {
     const wrapper = mount(EditProfileForm, {
+      props: {
+        currentUserInfo
+      },
       global: {
         plugins: [i18n]
       }
@@ -24,7 +28,7 @@ describe('EditProfileForm', () => {
     await emailInputField.setValue('random@mail.com');
     await passwordInputField.setValue('password');
     await submitButton.trigger('click');
-    
+
     expect(photoInputField.attributes('type')).toBe('file');
     expect(passwordInputField.attributes('type')).toBe('password');
     expect(wrapper.emitted()).toHaveProperty('save-user-info');
@@ -33,6 +37,9 @@ describe('EditProfileForm', () => {
 
   it('Does not trigger the "save-user-info" when fields are not completed', async () => {
     const wrapper = mount(EditProfileForm, {
+      props: {
+        currentUserInfo
+      },
       global: {
         plugins: [i18n]
       }
@@ -41,7 +48,7 @@ describe('EditProfileForm', () => {
     const submitButton = wrapper.find('[data-testid="save-button"]');
 
     await submitButton.trigger('click');
-    
+
     expect(wrapper.emitted()).not.toHaveProperty('save-user-info');
   });
 

@@ -5,10 +5,13 @@
       <div class="dropdown-container">
         <button data-testid="menu-button" @click="toggleDropdown">
           <div class="profile-photo">
-            <img src="../assets/images/profile-placeholder.png" alt="profile pic">
+            <img v-if="userInfo?.photoURL" :src="userInfo?.photoURL" alt="profile pic">
+            <img v-else src="../assets/images/profile-placeholder.png" alt="profile pic">
           </div>
           <div v-if="!isASmallDropDownButton">
-            <span>Username placeholder</span>
+            <span v-if="userInfo?.name">{{userInfo.name}}</span>
+            <span v-else>Username placeholder</span>
+
             <span v-if="!isShowingDropdown" class="material-icons">arrow_drop_down</span>
             <span v-else class="material-icons">arrow_drop_up</span>
           </div>
@@ -23,7 +26,7 @@
             <span class="menu-title">{{$t("general.groupChat")}}</span>
           </div>
           <hr>
-          <div data-testid="logout-menu-item">
+          <div data-testid="logout-menu-item" @click="$emit('logout')">
             <span class="material-icons icon red">logout</span>
             <span class="red menu-title">{{$t("general.logout")}}</span>
           </div>
@@ -34,11 +37,17 @@
 </template>
 <script setup lang="ts">
 import { onMounted, onUnmounted ,ref } from 'vue';
+import {UserInfo} from "../models/user-info";
 
 const isShowingDropdown = ref<boolean>(false);
 const isASmallDropDownButton = ref<boolean>(false);
 const toggleDropdown = () => isShowingDropdown.value = !isShowingDropdown.value;
-
+const emits = defineEmits<{
+  (e: 'logout'): void
+}>();
+const props = defineProps<{
+  userInfo: UserInfo
+}>()
 onMounted(() => {
   shortenDropdownButtonOnMobile();
   window.addEventListener('resize', shortenDropdownButtonOnMobile)
@@ -106,7 +115,7 @@ function shortenDropdownButtonOnMobile(): void {
           display: block;
         }
       }
-      
+
     }
   }
   div.dropdown {
@@ -121,7 +130,7 @@ function shortenDropdownButtonOnMobile(): void {
     div {
       cursor: pointer;
       border-radius: 8px;
-      display: block;
+      //display: block;
       display: flex;
       align-items: center;
       padding: 12px;

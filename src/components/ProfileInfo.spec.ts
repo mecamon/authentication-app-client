@@ -16,13 +16,11 @@ describe('ProfileInfo', () => {
     const bio = wrapper.find('[data-testid="bio"]');
     const phone = wrapper.find('[data-testid="phone"]');
     const email = wrapper.find('[data-testid="email"]');
-    const password = wrapper.find('[data-testid="password"]');
 
     expect(name.text()).toBe(userProfileMockInfo.name);
-    expect(photo.attributes().src).toContain(userProfileMockInfo.photo);
+    expect(photo.attributes().src).toContain(userProfileMockInfo.photoURL);
     expect(bio.text()).toBe(userProfileMockInfo.bio);
-    expect(phone.text()).toBe(userProfileMockInfo.phone);
+    expect(phone.text()).toBe(userProfileMockInfo.telephone);
     expect(email.text()).toBe(userProfileMockInfo.email);
-    expect(password.text()).toBe(userProfileMockInfo.password);
   });
 })

@@ -10,21 +10,38 @@
       </div>
       <span v-else>Login</span>
       <div class="input-container">
+        <label for="email" hidden >Email</label>
         <span class="material-icons icons">email</span>
-        <input type="email" placeholder="Email" v-model="userInfo.email" data-testid="email-input">
+        <input
+            id="email"
+            autocomplete="email"
+            type="email"
+            placeholder="Email"
+            v-model="userInfo.email"
+            data-testid="email-input"
+        >
       </div>
       <div class="input-container">
+        <label for="password" hidden >Password</label>
         <span class="material-icons icons">https</span>
-        <input type="password" placeholder="Password" v-model="userInfo.password" data-testid="password-input">
+        <input
+            id="password"
+            autocomplete="password"
+            type="password"
+            placeholder="Password"
+            v-model="userInfo.password"
+            data-testid="password-input"
+        >
       </div>
-      <button type="submit" 
+      <button
+        type="submit"
         :disabled="canSendUserInfo"
-        data-testid="log-or-sign-button" 
+        data-testid="log-or-sign-button"
         @click.prevent="handleSubmit"
         >{{ isLogin ? 'Login' : $t("auth.startCoding") }}
       </button>
       <span class="muted">{{ $t("auth.logWithSocials") }}</span>
-      <socials />
+      <socials @github-login="$emit('github-login')" />
       <span v-if="!isLogin" class="muted">{{ $t("auth.alreadyMember") }}
         <span class="accent" data-testid="login" @click="$emit('switch-to-login')">{{ $t("auth.login") }}</span>
       </span>
@@ -38,13 +55,14 @@
     </div>
   </div>
 </template>
+
 <script setup lang="ts">
-import { defineEmits, ref, computed } from 'vue';
+import {ref, computed} from 'vue';
 import Socials from './Socials.vue'
 
 const props = defineProps<{isLogin?: boolean}>();
 const userInfo = ref<UserInfo>({email: '', password: ''});
-const canSendUserInfo = computed(() => 
+const canSendUserInfo = computed(() =>
     userInfo.value.email === '' || userInfo.value.password === '');
 
 const handleSubmit = () => {
@@ -55,10 +73,11 @@ const handleSubmit = () => {
   }
 }
 const emits = defineEmits<{
-  (e: 'log-with-email-pass', userInfo: UserInfo): void 
-  (e: 'sign-with-email-pass', userInfo: UserInfo): void 
+  (e: 'log-with-email-pass', userInfo: UserInfo): void
+  (e: 'sign-with-email-pass', userInfo: UserInfo): void
   (e: 'switch-to-register'): void
   (e: 'switch-to-login'): void
+  (e: 'github-login'): void
 }>();
 
 interface UserInfo {
@@ -121,7 +140,7 @@ interface UserInfo {
     }
     input::placeholder {
       color: var(--mute-color);
-      font-weight: thin;
+      font-weight: lighter;
     }
   }
   button {

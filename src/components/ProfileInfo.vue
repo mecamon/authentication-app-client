@@ -8,39 +8,45 @@
           <span class="sub-title">{{ $t("profile.profileLabel") }}</span>
           <span class="small-text">{{ $t("profile.profileMsg") }}</span>
         </div>
-        <button class="edit-btn">{{ $t("profile.edit") }}</button>
+        <button @click="$emit('edit-mode')" class="edit-btn">{{ $t("profile.edit") }}</button>
       </div>
       <hr>
+      <!--PHOTO-->
       <div class="info-group">
         <label>{{ $t("profile.photoLabel") }}</label>
         <div class="profile-photo">
-          <img :src="userProfileInfo.photo" alt="profile photo" data-testid="photo">  
+          <img v-if="userProfileInfo?.photoURL" :src="userProfileInfo?.photoURL" alt="profile photo" data-testid="photo">
         </div>
       </div>
       <hr>
+      <!--NAME-->
       <div class="info-group">
         <label>{{ $t("profile.nameLabel") }}</label>
-        <span data-testid="name" class="content">{{userProfileInfo.name}}</span>
+        <span data-testid="name" class="content">{{userProfileInfo?.name}}</span>
       </div>
       <hr>
+      <!--BIO-->
       <div class="info-group">
         <label>{{ $t("profile.bioLabel") }}</label>
-        <span data-testid="bio" class="content">{{ userProfileInfo.bio }}</span>
+        <span data-testid="bio" class="content">{{ userProfileInfo?.bio }}</span>
       </div>
       <hr>
+      <!--TELEPHONE-->
       <div class="info-group">
         <label>{{ $t("profile.phoneLabel") }}</label>
-        <span data-testid="phone" class="content">{{ userProfileInfo.phone }}</span>
+        <span data-testid="phone" class="content">{{ userProfileInfo?.telephone }}</span>
       </div>
       <hr>
+      <!--EMAIL-->
       <div class="info-group">
         <label>{{ $t("profile.emailLabel") }}</label>
-        <span data-testid="email" class="content">{{ userProfileInfo.email }}</span>
+        <span data-testid="email" class="content">{{ userProfileInfo?.email }}</span>
       </div>
       <hr>
+      <!--PASSWORD-->
       <div class="info-group">
         <label>{{ $t("profile.passwordLabel") }}</label>
-        <span data-testid="password" class="content">{{ userProfileInfo.password }}</span>
+        <span data-testid="password" class="content">{{ '' }}</span>
       </div>
     </div>
     <div class="created-by">
@@ -50,12 +56,15 @@
   </div>
 </template>
 <script setup lang="ts">
-import { UserProfileInfo } from '../models/user-profile-info';
+import {UserInfo} from "../models/user-info";
 
-const props = defineProps<Props>()
+const emits = defineEmits<{
+  (e: 'edit-mode'): void
+}>()
 
+defineProps<Props>()
 interface Props {
-  userProfileInfo: UserProfileInfo
+  userProfileInfo: UserInfo
 }
 </script>
 <style lang="scss" scoped>
@@ -112,7 +121,7 @@ interface Props {
       border: 1px var(--border-color) solid;
       border-radius: 12px;
     }
-  }  
+  }
   @media (min-width: 1400px) {
     div.container {
       width: 50%;
@@ -131,6 +140,9 @@ interface Props {
     }
   }
   div.profile-photo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 72px;
     height: 72px;
     overflow: hidden;

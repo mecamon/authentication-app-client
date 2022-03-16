@@ -3,6 +3,30 @@
 </template>
 
 <script setup lang="ts">
+import {useAuth} from "./stores/auth";
+import {onMounted, watch} from "vue";
+import {storeToRefs} from "pinia";
+import {useRouter} from "vue-router"
+import {useHttpErrors} from "./stores/http-errors";
+
+const auth = useAuth()
+const httpErrors = useHttpErrors()
+const { isAuthenticated } = storeToRefs(auth)
+const router = useRouter()
+
+watch(isAuthenticated, (newValue) => {
+  if(!newValue) {
+    router.push({name: 'Home'})
+  }
+})
+onMounted(() => {
+  let token = localStorage.getItem('token')
+  if(!token) {
+    auth.setAuthentication(false)
+  } else {
+    auth.setAuthentication(true)
+  }
+})
 </script>
 
 <style lang="scss">
@@ -13,7 +37,7 @@
   box-sizing: border-box;
   font-family: var(--main-font-family);
   color: var(--common-text-color);
-} 
+}
 // SOFT-TRANSITION-TO-DARK-THEME
 * {
   transition: all 0.4s linear 0.1s;
