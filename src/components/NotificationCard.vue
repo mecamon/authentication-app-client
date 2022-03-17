@@ -7,7 +7,7 @@
           data-testid="head">
         <span class="material-icons icon" data-testid="icon">error</span>
         <span class="mid-size-font" data-testid="title-value">
-          {{ props.error.statusCode?.toString().startsWith('2') ? 'Success' : 'Error' }}
+          {{ props.error.statusCode?.toString().startsWith('2') ? $t("notification.success") : $t("notification.error") }}
         </span>
       </div>
       <ul>

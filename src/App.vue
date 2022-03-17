@@ -59,6 +59,8 @@ button {
   justify-content: center;
   align-items: center;
   height: 3rem;
+  outline: none;
+  border: none;
   //span {
   //  color: white;
   //}
@@ -66,10 +68,20 @@ button {
 button:disabled {
   opacity: 0.7;
 }
-.primary-btn {
-  span {
-    color: white;
-  }
+.lang-btn {
+  margin: 0 0.4rem;
+  padding: 0.5rem;
+  background-color: var(--background-color);
+  height: 2rem;
+  width: 2rem;
+  border-radius: 0.4rem;
+}
+.lang-btn:hover {
+  background-color: var(--accent-color) !important;
+  color: white;
+}
+.lang-btn-selected {
+  background-color: var(--border-color) !important;
 }
 .mid-size-font {
   font-size: 20px;

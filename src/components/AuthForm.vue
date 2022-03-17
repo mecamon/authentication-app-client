@@ -3,36 +3,45 @@
     <form @submit.prevent="handleSubmit">
       <div class="logo-area">
         <img src="../assets/images/devchallenges.svg" alt="dev challenges logo">
+        <div class="lang-group">
+          <div>
+            <button class="lang-btn" type="button" :class="[$i18n.locale === 'en' ? 'lang-btn-selected': '']" @click="$i18n.locale='en'">EN</button>
+            <button class="lang-btn" type="button" :class="[$i18n.locale === 'es' ? 'lang-btn-selected': '']" @click="$i18n.locale='es'">ES</button>
+          </div>
+        </div>
       </div>
       <div v-if="!isLogin">
         <span class="bold">{{ $t("auth.loginFormMsg1") }}</span>
         <span class="light">{{ $t("auth.loginFormMsg2") }}</span>
       </div>
       <span v-else>Login</span>
+<!--      EMAIL-->
       <div class="input-container">
-        <label for="email" hidden >Email</label>
+        <label for="email" hidden >{{ $t("profile.emailLabel") }}</label>
         <span class="material-icons icons">email</span>
         <input
             id="email"
             autocomplete="email"
             type="email"
-            placeholder="Email"
+            :placeholder="$t('auth.emailPlaceholder')"
             v-model="userInfo.email"
             data-testid="email-input"
         >
       </div>
+<!--      PASSWORD-->
       <div class="input-container">
-        <label for="password" hidden >Password</label>
+        <label for="password" hidden >{{ $t("profile.passwordLabel") }}</label>
         <span class="material-icons icons">https</span>
         <input
             id="password"
             autocomplete="password"
             type="password"
-            placeholder="Password"
+            :placeholder="$t('auth.passwordPlaceholder')"
             v-model="userInfo.password"
             data-testid="password-input"
         >
       </div>
+<!--      SUBMIT-->
       <button
         type="submit"
         :disabled="canSendUserInfo"
@@ -47,6 +56,7 @@
           {{ isLogin ? 'Login' : $t("auth.startCoding") }}
         </span>
       </button>
+<!--      SOCIALS-->
       <span class="muted">{{ $t("auth.logWithSocials") }}</span>
       <socials @github-login="$emit('github-login')" />
       <span v-if="!isLogin" class="muted">{{ $t("auth.alreadyMember") }}
@@ -96,6 +106,16 @@ interface UserInfo {
 </script>
 
 <style lang="scss" scoped>
+  div.lang-group {
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    div {
+      display: flex;
+      align-items: center;
+    }
+  }
   .form-container {
     width: 100%;
     margin: auto;
@@ -152,7 +172,7 @@ interface UserInfo {
       font-weight: lighter;
     }
   }
-  button {
+  button.primary-btn {
     background-color: var(--accent-color);
     color: white;
     font-weight: 400;
@@ -162,6 +182,9 @@ interface UserInfo {
     border-radius: 8px;
     margin-top: 22px;
     margin-bottom: 32px;
+    span {
+      color: white;
+    }
   }
   span.bold {
     font-weight: 600;
@@ -174,6 +197,9 @@ interface UserInfo {
     display: block;
   }
   .logo-area {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 27px;
     img {
       width: auto;

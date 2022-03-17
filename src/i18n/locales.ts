@@ -12,10 +12,12 @@ const messages = {
       loginFormMsg1: 'Join thousands of learners from around the world ',
       loginFormMsg2: 'Master web development by making real-life projects. There are multiple paths for you to choose.',
       logWithSocials: 'or continue with these social profile',
-      alreadyMember: 'Adready a member? ',
+      alreadyMember: 'Already a member? ',
       registerMsg: "Don't have an account yet? ",
       login: 'Login',
       register: 'Register',
+      emailPlaceholder: 'Email',
+      passwordPlaceholder: 'Password',
       startCoding: 'Start coding now',
       createdBy: 'Created by Carlos Mejía (Meca)',
     },
@@ -24,14 +26,22 @@ const messages = {
       basicInfo: 'Basic info, like your name and photo',
       profileLabel: 'Profile',
       profileMsg: 'Some info may be visible to other people',
+      changeInfo: 'Change Info',
+      changesReflected: 'Changes will be reflected to every services',
+      changePhoto: 'CHANGE FOTO',
       edit: 'Edit',
+      save: 'Save',
       photoLabel: 'PHOTO',
       nameLabel: 'NAME',
       bioLabel: 'BIO',
       phoneLabel: 'PHONE',
       emailLabel: 'EMAIL',
       passwordLabel: 'PASSWORD'
-    }
+    },
+      notification: {
+        error: 'Error!',
+        success: 'Success!'
+      }
   },
   es: {
     general: {
@@ -47,7 +57,9 @@ const messages = {
       alreadyMember: '¿Ya eres miembro? ',
       registerMsg: "¿Todavía no tienes una cuenta? ",
       login: 'Haz login',
-      register: 'Registrate',
+      register: 'Regístrate',
+      emailPlaceholder: 'Email',
+      passwordPlaceholder: 'Contraseña',
       startCoding: 'Comience ahora',
       createdBy: 'Creado por Carlos Mejía (Meca)',
     },
@@ -56,13 +68,21 @@ const messages = {
       basicInfo: 'Información básica, como tu nombre y foto',
       profileLabel: 'Perfil',
       profileMsg: 'Alguna información será visible para otros',
+      changeInfo: 'Cambiar información',
+      changesReflected: 'Los cambios serán reflejandos en todos los servicios',
+      changePhoto: 'CAMBIAR FOTO',
       edit: 'Editar',
+      save: 'Guardar',
       photoLabel: 'FOTO',
       nameLabel: 'NOMBRE',
       bioLabel: 'BIO',
       phoneLabel: 'TELÉFONO',
       emailLabel: 'EMAIL',
-      passwordLabel: 'CONTRASEÑA'
+      passwordLabel: 'CONTRASEÑA',
+    },
+    notification: {
+      error: '¡Error!',
+      success: '¡Hecho!'
     }
   }
 }

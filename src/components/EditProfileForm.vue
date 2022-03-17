@@ -6,38 +6,45 @@
     </span>
     <form id="edit-form" @submit.prevent="handlerSubmit()" class="profile-info">
       <div class="title-area">
-        <h2>Change Info</h2>
-        <h6>Changes will be reflected to every services</h6>
+        <h2>{{$t("profile.changeInfo")}}</h2>
+        <h6>{{$t("profile.changesReflected")}}</h6>
       </div>
+<!--      IMAGE-->
       <div class="image-area">
         <div @click="uploadPhoto()" class="image-container">
           <span class="material-icons icon">photo_camera</span>
           <img v-if="!userInfoToEdit.photoURL" src="../assets/images/profile-placeholder.png" alt="profile image">
           <img v-else :src="userInfoToEdit.photoURL" alt="profile image">
         </div>
-        <button type="button" @click="uploadPhoto()">CHANGE PHOTO</button>
+        <button type="button" @click="uploadPhoto()">{{ $t("profile.changePhoto") }}</button>
         <input type="file" name="file" data-testid="photo" ref="inputFile">
       </div>
+<!--      NAME-->
       <div class="info-group">
-        <label for="user-name-input">Name</label>
+        <label for="user-name-input">{{$t("profile.nameLabel")}}</label>
         <input type="text" name="name" v-model="userInfoToEdit.name" id="user-name-input" data-testid="name">
       </div>
+<!--      BIO-->
       <div class="info-group">
-        <label for="user-name-input">Bio</label>
+        <label for="user-name-input">{{$t("profile.bioLabel")}}</label>
         <input type="text" name="bio" v-model="userInfoToEdit.bio" id="user-bio-input" data-testid="bio">
       </div>
+<!--      PHONE-->
       <div class="info-group">
-        <label for="user-name-input">Phone</label>
+        <label for="user-name-input">{{$t("profile.phoneLabel")}}</label>
         <input type="number" name="telephone" v-model="userInfoToEdit.telephone" id="user-phone-input" data-testid="phone">
       </div>
+<!--      EMAIL-->
       <div class="info-group">
-        <label for="user-name-input">Email</label>
+        <label for="user-name-input">{{$t("profile.emailLabel")}}</label>
         <input type="email" name="email" v-model="userInfoToEdit.email" id="user-email-input" data-testid="email">
       </div>
+<!--      PASSWORD-->
       <div class="info-group">
-        <label for="user-name-input">Password</label>
+        <label for="user-name-input">{{$t("profile.passwordLabel")}}</label>
         <input type="password" name="password" v-model="userInfoToEdit.password" id="user-password-input" data-testid="password">
       </div>
+<!--      SUBMIT-->
       <div>
         <button
           type="submit"
@@ -48,7 +55,7 @@
           <span v-if="isLoading" class="lds-ring">
             <span></span><span></span><span></span><span></span>
           </span>
-          <span v-if="!isLoading">Save</span>
+          <span v-if="!isLoading">{{$t("profile.save")}}</span>
         </button>
       </div>
     </form>
