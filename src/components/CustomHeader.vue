@@ -29,8 +29,16 @@
           <div class="lang-group">
             <span class="material-icons-outlined material-icons">language</span>
             <div>
-              <button class="lang-btn" :class="[$i18n.locale === 'en' ? 'lang-btn-selected': '']" @click="$i18n.locale='en'">EN</button>
-              <button class="lang-btn" :class="[$i18n.locale === 'es' ? 'lang-btn-selected': '']" @click="$i18n.locale='es'">ES</button>
+              <button
+                  class="lang-btn"
+                  :class="[$i18n.locale === 'en' ? 'lang-btn-selected': '']"
+                  @click="setLanguage('en-US')">EN
+              </button>
+              <button
+                  class="lang-btn"
+                  :class="[$i18n.locale === 'es' ? 'lang-btn-selected': '']"
+                  @click="setLanguage('es-ES')">ES
+              </button>
             </div>
           </div>
           <hr>
@@ -46,7 +54,9 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted ,ref } from 'vue';
 import {UserInfo} from "../models/user-info";
+import {useI18n} from "vue-i18n";
 
+const {locale} = useI18n({useScope: 'global'})
 const isShowingDropdown = ref<boolean>(false);
 const isASmallDropDownButton = ref<boolean>(false);
 const toggleDropdown = () => isShowingDropdown.value = !isShowingDropdown.value;
@@ -56,6 +66,14 @@ const emits = defineEmits<{
 const props = defineProps<{
   userInfo: UserInfo
 }>()
+const setLanguage = (lang: string) => {
+  localStorage.setItem('lang', lang)
+  if (lang === 'es-ES') {
+    locale.value = 'es'
+  } else {
+    locale.value = 'en'
+  }
+}
 onMounted(() => {
   shortenDropdownButtonOnMobile();
   window.addEventListener('resize', shortenDropdownButtonOnMobile)
@@ -66,7 +84,6 @@ onUnmounted(() => {
 function shortenDropdownButtonOnMobile(): void {
   isASmallDropDownButton.value = window.innerWidth < 800
 }
-
 </script>
 
 <style lang="scss" scoped>

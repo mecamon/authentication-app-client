@@ -1,5 +1,6 @@
 import axios, {AxiosError} from 'axios'
-const baseURL = 'http://localhost:8080'
+// @ts-ignore
+const baseURL = !import.meta.env.PROD ? 'http://localhost:8080' : ''
 
 const axiosJsonIns = axios.create({
     baseURL,
@@ -8,9 +9,10 @@ const axiosJsonIns = axios.create({
 })
 axiosJsonIns.interceptors.request.use(function (config) {
     let token = localStorage.getItem('token')
+    let lang = localStorage.getItem('lang')
     config.headers = {
-
         'Authorization': token ?? '',
+        'Accept-Language': lang ?? ''
     }
     return config
 }, function (config) {
@@ -33,8 +35,10 @@ const axiosMultiPartIns = axios.create({
 })
 axiosMultiPartIns.interceptors.request.use(function (config) {
     let token = localStorage.getItem('token')
+    let lang = localStorage.getItem('lang')
     config.headers = {
         'Authorization': token ?? '',
+        'Accept-Language': lang ?? ''
     }
     return config
 }, function (config) {

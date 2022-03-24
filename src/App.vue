@@ -15,7 +15,9 @@ import {storeToRefs} from "pinia";
 import {useRouter} from "vue-router"
 import {useHttpErrors} from "./stores/http-errors";
 import NotificationCard from "./components/NotificationCard.vue";
+import {useI18n} from "vue-i18n";
 
+const {locale} = useI18n({useScope: 'global'})
 const auth = useAuth()
 const httpErrors = useHttpErrors()
 const { isAuthenticated } = storeToRefs(auth)
@@ -26,7 +28,17 @@ watch(isAuthenticated, (newValue) => {
     router.push({name: 'Home'})
   }
 })
+function setLanguage() {
+  const lang = localStorage.getItem('lang')
+  if (!lang) {
+    localStorage.setItem('lang', 'en-US')
+    locale.value = 'en'
+  } else {
+    localStorage.setItem('lang', lang)
+  }
+}
 onMounted(() => {
+  setLanguage()
   let token = localStorage.getItem('token')
   if(!token) {
     auth.setAuthentication(false)
@@ -61,9 +73,6 @@ button {
   height: 3rem;
   outline: none;
   border: none;
-  //span {
-  //  color: white;
-  //}
 }
 button:disabled {
   opacity: 0.7;

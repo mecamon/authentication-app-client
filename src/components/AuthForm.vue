@@ -5,8 +5,18 @@
         <img src="../assets/images/devchallenges.svg" alt="dev challenges logo">
         <div class="lang-group">
           <div>
-            <button class="lang-btn" type="button" :class="[$i18n.locale === 'en' ? 'lang-btn-selected': '']" @click="$i18n.locale='en'">EN</button>
-            <button class="lang-btn" type="button" :class="[$i18n.locale === 'es' ? 'lang-btn-selected': '']" @click="$i18n.locale='es'">ES</button>
+            <button
+                class="lang-btn"
+                type="button"
+                :class="[$i18n.locale === 'en' ? 'lang-btn-selected': '']"
+                @click="setLanguage('en-US')">EN
+            </button>
+            <button
+                class="lang-btn"
+                type="button"
+                :class="[$i18n.locale === 'es' ? 'lang-btn-selected': '']"
+                @click="setLanguage('es-ES')">ES
+            </button>
           </div>
         </div>
       </div>
@@ -77,18 +87,27 @@
 import {ref, computed} from 'vue';
 import Socials from './Socials.vue'
 import {useAuth} from "../stores/auth";
+import {useI18n} from "vue-i18n";
 
 const props = defineProps<{isLogin?: boolean}>();
 const userInfo = ref<UserInfo>({email: '', password: ''});
 const canSendUserInfo = computed(() =>
     userInfo.value.email === '' || userInfo.value.password === '');
 const auth = useAuth()
-
+const { locale } = useI18n({useScope: 'global'})
 const handleSubmit = () => {
   if(props.isLogin) {
     emits('log-with-email-pass', userInfo.value);
   } else {
     emits('sign-with-email-pass', userInfo.value);
+  }
+}
+const setLanguage = (lang: string) => {
+  localStorage.setItem('lang', lang)
+  if (lang === 'es-ES') {
+    locale.value = 'es'
+  } else {
+    locale.value = 'en'
   }
 }
 const emits = defineEmits<{
