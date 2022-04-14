@@ -2,7 +2,7 @@
   <div>
     <layout>
       <template v-slot:header>
-        <custom-header :user-info="userInfo.data" @logout="logout()" />
+        <custom-header :user-info="{...userInfo.data}" @logout="logout()" />
       </template>
       <template v-slot:main>
         <edit-profile-form
@@ -12,7 +12,7 @@
             :is-loading="userInfo.isLoading"
             :current-user-info="currentUserInfo"
         />
-        <profile-info v-else @edit-mode="setToEditMode()" :user-profile-info="userInfo.data" />
+        <profile-info v-else @edit-mode="setToEditMode()" :user-profile-info="{...userInfo.data}" />
       </template>
     </layout>
   </div>

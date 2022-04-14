@@ -1,9 +1,9 @@
 export class UserInfo {
-  name?: string
-  bio?: string
-  email?:  string
-  telephone?: string
-  photoURL?:  string
+  name?: string | undefined
+  bio?: string | undefined
+  email?:  string | undefined
+  telephone?: string | undefined
+  photoURL?:  string | undefined
 
   constructor(
       name: string,
