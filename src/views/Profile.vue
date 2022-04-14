@@ -49,6 +49,7 @@ const setToEditMode = () => {
   currentUserInfo.value.email = data?.email
   currentUserInfo.value.photoURL = data?.photoURL
   currentUserInfo.value.telephone = data?.telephone
+  currentUserInfo.value.password = ''
 }
 
 onMounted(async () => {

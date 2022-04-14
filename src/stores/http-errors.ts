@@ -2,7 +2,7 @@ import {defineStore} from "pinia";
 import {useAuth} from "./auth";
 
 interface State {
-  statusCode: number | undefined
+  statusCode: number
   msg: string | object
 }
 
@@ -20,14 +20,14 @@ export const useHttpErrors = defineStore('http-errors', {
         const auth = useAuth()
         auth.setAuthentication(false)
       }
-      this.statusCode = statusCode
+      this.statusCode = Number(statusCode)
       this.msg = msg
     },
     resetError() {
       setTimeout(() => {
         this.statusCode = 0
         this.msg = ''
-      }, 6000)
+      }, 5000)
     }
   }
 })

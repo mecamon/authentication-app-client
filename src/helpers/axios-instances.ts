@@ -1,10 +1,10 @@
 import axios, {AxiosError} from 'axios'
 // @ts-ignore
-const baseURL = !import.meta.env.PROD ? 'http://localhost:8080' : ''
+const baseURL = !import.meta.env.PROD ? 'http://localhost:80' : '45-56-118-203.ip.linodeusercontent.com'
 
 const axiosJsonIns = axios.create({
     baseURL,
-    timeout: 4000,
+    timeout: 8000,
     headers: {'Content-Type': 'application/json'}
 })
 axiosJsonIns.interceptors.request.use(function (config) {

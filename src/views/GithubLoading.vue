@@ -14,13 +14,21 @@ import {onMounted, watch} from "vue";
 import {useAuth} from "../stores/auth";
 import {useRoute, useRouter} from "vue-router";
 import {storeToRefs} from "pinia";
+import {useHttpErrors} from "../stores/http-errors";
 const auth = useAuth()
+const httpError = useHttpErrors()
 const route = useRoute()
 const router = useRouter()
 const {isAuthenticated} = storeToRefs(auth)
+const {statusCode} = storeToRefs(httpError)
 watch(isAuthenticated, (newValue, oldValue) => {
   if(!oldValue && newValue) {
     router.push({name: 'Profile'})
+  }
+})
+watch(statusCode, (newValue) => {
+  if (newValue !== 0) {
+    router.push({name: 'Home'})
   }
 })
 onMounted(async () => {

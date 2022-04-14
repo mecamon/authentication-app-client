@@ -224,6 +224,9 @@ const emptyFields = computed(() => {
     border-radius: 8px;
     font-size: 16px;
     padding: 8px 24px;
+    span {
+      color: white;
+    }
   }
 
 </style>

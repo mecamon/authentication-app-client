@@ -37,6 +37,7 @@ const props = defineProps<{error: ErrorInfo}>()
 
 <style lang="scss" scoped>
   .notification-card {
+    background-color: white;
     min-width: 20rem !important;
     max-width: 26rem !important;
     padding: 0.4rem;
