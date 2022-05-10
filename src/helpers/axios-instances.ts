@@ -1,6 +1,6 @@
 import axios, {AxiosError} from 'axios'
 // @ts-ignore
-const baseURL = !import.meta.env.PROD ? 'http://localhost:8080' : 'https://authentication-app-server.onrender.com/api'
+const baseURL = !import.meta.env.PROD ? 'http://localhost:8080' : 'https://authentication-app-server.onrender.com'
 
 const axiosJsonIns = axios.create({
     baseURL,
