@@ -79,7 +79,7 @@ onMounted(() => {
   window.addEventListener('resize', shortenDropdownButtonOnMobile)
 });
 onUnmounted(() => {
-  window.addEventListener('resize', shortenDropdownButtonOnMobile)
+  window.removeEventListener('resize', shortenDropdownButtonOnMobile)
 });
 function shortenDropdownButtonOnMobile(): void {
   isASmallDropDownButton.value = window.innerWidth < 800
